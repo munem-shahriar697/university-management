@@ -32,8 +32,8 @@
                 <a class="navbar-brand fw-bolder" href="admin_student.php">
                     <p>&nbsp; Student Panel</p>
                 </a>
-                <a class="navbar-brand" href="admin_adding_teacher.php">
-                    <p>&nbsp; Adding faculty</p>
+                <a class="navbar-brand" href="admin_teacher.php">
+                    <p>&nbsp; Faculty Panel</p>
                 </a>
                 <a class="navbar-brand" href="admin_adding_section.php">
                     <p>&nbsp; Assigning section</p>

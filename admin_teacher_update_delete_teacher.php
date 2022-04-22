@@ -1,19 +1,19 @@
  <?php
     require_once('configure.php');
 
-    $id = $_GET['iid'];
+    $id = $_GET['id'];
 
-    $sql = "DELETE FROM student_user WHERE id='$id'";
+    $sql = "DELETE FROM teacher_user WHERE id='$id'";
 
     if(mysqli_query($con,$sql)==true)
     {
         //echo '<script>alert("Successfully removed Student from Database!!")</script>';
-        echo "<script>location.href = \"admin_update_student.php\";</script>";
+        echo "<script>location.href = \"admin_teacher_update_teacher.php\";</script>";
     }
     else
     {
         //echo '<script>alert("Could not remove Student from Database!!")</script>';
-        echo "<script>location.href = \"admin_update_student.php\";</script>";
+        echo "<script>location.href = \"admin_teacher_update_teacher.php\";</script>";
     }
     
     $con->close();

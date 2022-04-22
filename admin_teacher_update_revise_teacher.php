@@ -34,10 +34,10 @@
                 <a class="navbar-brand" href="admin_profile.php">
                     <p>&nbsp; Profile</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="admin_student.php">
+                <a class="navbar-brand" href="admin_student.php">
                     <p>&nbsp; Student Panel</p>
                 </a>
-                <a class="navbar-brand" href="admin_teacher.php">
+                <a class="navbar-brand fw-bolder" href="admin_teacher.php">
                     <p>&nbsp; Faculty Panel</p>
                 </a>
                 <a class="navbar-brand" href="admin_adding_section.php">
@@ -53,17 +53,17 @@
         </nav>
         <nav class="navbar navbar-light">
             <div class="container justify-content-around">
-                <a class="navbar-brand" href="admin_adding_student.php">
-                    <p>&nbsp; Add Student</p>
+                <a class="navbar-brand" href="admin_teacher_adding_student.php">
+                    <p>&nbsp; Add Teacher</p>
                 </a>
-                <a class="navbar-brand" href="admin_showing_student.php">
-                    <p>&nbsp; All Students</p>
+                <a class="navbar-brand" href="admin_teacher_showing_student.php">
+                    <p>&nbsp; All Teacher</p>
                 </a>
-                <a class="navbar-brand" href="admin_search_student.php">
-                    <p>&nbsp; Find Student</p>
+                <a class="navbar-brand" href="admin_teacher_search_student.php">
+                    <p>&nbsp; Find Teacher</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="admin_update_student.php">
-                    <p>&nbsp; Update Student</p>
+                <a class="navbar-brand fw-bolder" href="admin_teacher_update_student.php">
+                    <p>&nbsp; Update Teacher</p>
                 </a>
             </div>
         </nav>

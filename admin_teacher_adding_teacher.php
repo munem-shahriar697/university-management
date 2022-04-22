@@ -32,8 +32,8 @@
                 <a class="navbar-brand" href="admin_student.php">
                     <p>&nbsp; Student Panel</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="admin_adding_teacher.php">
-                    <p>&nbsp; Adding faculty</p>
+                <a class="navbar-brand fw-bolder" href="admin_teacher.php">
+                    <p>&nbsp; Faculty Panel</p>
                 </a>
                 <a class="navbar-brand" href="admin_adding_section.php">
                     <p>&nbsp; Assigning section</p>
@@ -43,6 +43,22 @@
                 </a>
                 <a class="navbar-brand" href="admin_logout.php">
                     <p>&nbsp; Logout</p>
+                </a>
+            </div>
+        </nav>
+        <nav class="navbar navbar-light">
+            <div class="container justify-content-around">
+                <a class="navbar-brand fw-bolder" href="admin_teacher_adding_steacher.php">
+                    <p>&nbsp; Add Teacher</p>
+                </a>
+                <a class="navbar-brand" href="admin_teacher_showing_teacher.php">
+                    <p>&nbsp; All Teacher</p>
+                </a>
+                <a class="navbar-brand" href="admin_teacher_search_teacher.php">
+                    <p>&nbsp; Find Teacher</p>
+                </a>
+                <a class="navbar-brand" href="admin_teacher_update_teacher.php">
+                    <p>&nbsp; Update Teacher</p>
                 </a>
             </div>
         </nav>
@@ -57,7 +73,7 @@
         <div class="container" style="width: 1000px;">
             <div class="add py-5 ps-5 mx-auto">
                 <h3 class="text-white">Insert information of a Faculty to add</h3>
-                <form action="admin_adding_teacher.php" method="post">
+                <form action="admin_teacher_adding_teacher.php" method="post">
                     <input type="text" name="fname" id="fname"
                         class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light"
                         style="height: 38px; width:90%;" placeholder="First Name"><br><br>
@@ -95,6 +111,7 @@
     //session_start();
         if(isset($_POST['add']))
         {
+            $admin = $_SESSION['username'];
             $first = $_POST['fname'];
             $last = $_POST['lname'];
             $dept = $_POST['department'];
@@ -116,7 +133,7 @@
             }
             else if($first!='' || $last!='' || $email!='' || $phone!='' || $dept!='' || $date!='')
             {
-                $sql = "INSERT INTO teacher_user(fname, lname, teacherphone, teacheremail, dept, joining_date, teacheruser, teacherpass) VALUES('$first', '$last', '$phone', '$email', '$dept', '$date', '$first', '$first');";
+                $sql = "INSERT INTO teacher_user(fname, lname, teacherphone, teacheremail, dept, joining_date, teacheruser, teacherpass, added_by) VALUES('$first', '$last', '$phone', '$email', '$dept', '$date', '$first', '$first','$admin');";
                 if($con->query($sql)==true )
                 {
                     echo '<script>alert("Successfully added Faculty")</script>';
@@ -130,8 +147,8 @@
             {
                 echo '<script>alert("Please enter all the information correctly")</script>';
             }
-            $con->close();
         }
+        $con->close();
     ?>
 
     <!-- Bootstrap script -->

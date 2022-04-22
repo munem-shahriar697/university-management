@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="photo/unilogo1.png">
-    <title>Find Student</title>
+    <title>Find Teacher</title>
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -29,10 +29,10 @@
                 <a class="navbar-brand" href="admin_profile.php">
                     <p>&nbsp; Profile</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="admin_student.php">
+                <a class="navbar-brand" href="admin_student.php">
                     <p>&nbsp; Student Panel</p>
                 </a>
-                <a class="navbar-brand" href="admin_teacher.php">
+                <a class="navbar-brand fw-bolder" href="admin_teacher.php">
                     <p>&nbsp; Faculty Panel</p>
                 </a>
                 <a class="navbar-brand" href="admin_adding_section.php">
@@ -48,17 +48,17 @@
         </nav>
         <nav class="navbar navbar-light">
             <div class="container justify-content-around">
-                <a class="navbar-brand" href="admin_adding_student.php">
-                    <p>&nbsp; Add Student</p>
+                <a class="navbar-brand" href="admin_teacher_adding_teacher.php">
+                    <p>&nbsp; Add Teacher</p>
                 </a>
-                <a class="navbar-brand" href="admin_showing_student.php">
-                    <p>&nbsp; All Students</p>
+                <a class="navbar-brand" href="admin_teacher_showing_teacher.php">
+                    <p>&nbsp; All Teacher</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="admin_search_student.php">
-                    <p>&nbsp; Find Student</p>
+                <a class="navbar-brand fw-bolder" href="admin_teacher_search_teacher.php">
+                    <p>&nbsp; Find Teacher</p>
                 </a>
-                <a class="navbar-brand" href="admin_update_student.php">
-                    <p>&nbsp; Update Student</p>
+                <a class="navbar-brand" href="admin_teacher_update_teacher.php">
+                    <p>&nbsp; Update Teacher</p>
                 </a>
             </div>
         </nav>
@@ -69,7 +69,7 @@
 
     <div class="container" style="width: 1000px;">
             <div class="add py-5 ps-5 mx-auto">
-                    <form action="admin_search_student.php" method="post">
+                    <form action="admin_teacher_search_teacher.php" method="post">
                     <input type="text" name="name" id="name"
                         class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light"
                         style="height: 38px; width:90%;" placeholder="Search Name or ID"><br><br>
@@ -80,18 +80,14 @@
             </div>
         </div>
         <table class="table text-white table-bordered mt-3 p-2">
-            <thead>
+        <thead>
                 <th>ID </th>
                 <th>First name </th>
                 <th>Last name </th>
-                <th>Birth date </th>
-                <th>Blood group </th>
+                <th>Joining date </th>
                 <th>Department </th>
-                <th>Semester </th>
-                <th>CGPA </th>
                 <th>Phone number </th>
                 <th>Email </th>
-                <th>Address </th>
                 <th>Added by </th>
             </thead>
             <tbody>
@@ -103,36 +99,33 @@
             $key = $_POST['name'];
             $rev = strrev($key);
             $select;
-            if(substr($key,0,3)=="301")
+
+            if(substr($key,0,3)=="201")
             {
-                $select = mysqli_query($con, "SELECT * FROM student_user WHERE id LIKE '%$key%'");
+                $select = mysqli_query($con, "SELECT * FROM teacher_user WHERE id LIKE '%$key%'");
             }
-            else if(substr($rev,0,4)=="ude.htuoshtron@")
+            else if(substr($rev,0,3)=="ude")
             {
-                $select = mysqli_query($con, "SELECT * FROM student_user WHERE studentemail LIKE '%$key%'");
+                $select = mysqli_query($con, "SELECT * FROM teacher_user WHERE teacheremail LIKE '%$key%'");
             }
             else
             {
-                $select = mysqli_query($con, "SELECT * FROM student_user WHERE CONCAT(fname,\" \",lname) LIKE '%$key%'");
+                $select = mysqli_query($con, "SELECT * FROM teacher_user WHERE CONCAT(fname,\" \",lname) LIKE '%$key%'");
             }
             
             if($key!='')
             {    while($row = mysqli_fetch_array($select))
                 {
                     echo "<tr>
-                        <td>" . $row['id'] . "</td>
-                        <td>" . ucwords($row['fname']) . "</td>
-                        <td>" . ucwords($row['lname']) . "</td>
-                        <td>" . $row['birth_date'] . "</td>
-                        <td>" . $row['blood_group'] . "</td>
-                        <td>" . $row['dept'] . "</td>
-                        <td>" . $row['semester'] . "</td>
-                        <td>" . $row['cgpa'] . "</td>
-                        <td>" . $row['studentphone'] . "</td>
-                        <td>" . $row['studentemail'] . "</td>
-                        <td>" . $row['addr'] . "</td>
-                        <td>" . $row['added_by'] . "</td>
-                    </tr>";
+                    <td>" . $row['id'] . "</td>
+                    <td>" . ucwords($row['fname']) . "</td>
+                    <td>" . ucwords($row['lname']) . "</td>
+                    <td>" . $row['joining_date'] . "</td>
+                    <td>" . $row['dept'] . "</td>
+                    <td>" . $row['teacherphone'] . "</td>
+                    <td>" . $row['teacheremail'] . "</td>
+                    <td>" . $row['added_by'] . "</td>
+                </tr>";
                 } 
             }
             else

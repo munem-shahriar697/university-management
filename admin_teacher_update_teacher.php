@@ -31,10 +31,10 @@
                 <a class="navbar-brand" href="admin_profile.php">
                     <p>&nbsp; Profile</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="admin_student.php">
+                <a class="navbar-brand" href="admin_student.php">
                     <p>&nbsp; Student Panel</p>
                 </a>
-                <a class="navbar-brand" href="admin_teacher.php">
+                <a class="navbar-brand  fw-bolder" href="admin_teacher.php">
                     <p>&nbsp; Faculty Panel</p>
                 </a>
                 <a class="navbar-brand" href="admin_adding_section.php">
@@ -50,17 +50,17 @@
         </nav>
         <nav class="navbar navbar-light">
             <div class="container justify-content-around">
-                <a class="navbar-brand" href="admin_adding_student.php">
-                    <p>&nbsp; Add Student</p>
+                <a class="navbar-brand" href="admin_teacher_adding_teacher.php">
+                    <p>&nbsp; Add Teacher</p>
                 </a>
-                <a class="navbar-brand" href="admin_showing_student.php">
-                    <p>&nbsp; All Students</p>
+                <a class="navbar-brand" href="admin_teacher_showing_teacher.php">
+                    <p>&nbsp; All Teacher</p>
                 </a>
-                <a class="navbar-brand" href="admin_search_student.php">
-                    <p>&nbsp; Find Student</p>
+                <a class="navbar-brand" href="admin_teacher_search_teacher.php">
+                    <p>&nbsp; Find Teacher</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="admin_update_student.php">
-                    <p>&nbsp; Update Student</p>
+                <a class="navbar-brand fw-bolder" href="admin_teacher_update_teacher.php">
+                    <p>&nbsp; Update Teacher</p>
                 </a>
             </div>
         </nav>
@@ -85,17 +85,13 @@
         </div>
         <table class="table text-white table-bordered mt-3 p-2">
             <thead>
-                <th>ID </th>
+            <th>ID </th>
                 <th>First name </th>
                 <th>Last name </th>
-                <th>Birth date </th>
-                <th>Blood group </th>
+                <th>Joining date </th>
                 <th>Department </th>
-                <th>Semester </th>
-                <th>CGPA </th>
                 <th>Phone number </th>
                 <th>Email </th>
-                <th>Address </th>
                 <th>Added by </th>
                 <th colspan="2">Operations </th>
             </thead>
@@ -104,29 +100,24 @@
             if(isset($_POST['add'])==FALSE)
             {
                 $user = $_SESSION['username'];
-                $select = mysqli_query($con, "SELECT * FROM student_user");
+                $select = mysqli_query($con, "SELECT * FROM teacher_user");
             
                 while($row = mysqli_fetch_array($select))
                 {
                     echo "<tr>
-                        <td>" . $row['id'] . "</td>
-                        <td>" . ucwords($row['fname']) . "</td>
-                        <td>" . ucwords($row['lname']) . "</td>
-                        <td>" . $row['birth_date'] . "</td>
-                        <td>" . $row['blood_group'] . "</td>
-                        <td>" . $row['dept'] . "</td>
-                        <td>" . $row['semester'] . "</td>
-                        <td>" . $row['cgpa'] . "</td>
-                        <td>" . $row['studentphone'] . "</td>
-                        <td>" . $row['studentemail'] . "</td>
-                        <td>" . $row['addr'] . "</td>
-                        <td>" . $row['added_by'] . "</td>
-                        <td>" . "<a class=\"btn btn-info fw-bold\"href = 'admin_update_revise_student.php?iid=$row[id]&fn=$row[fname]&ln=$row[lname]&date=$row[birth_date]&address=$row[addr]'>Update" . "</td>
-                        <td>"."<a class=\"btn btn-danger fw-bold\"href = 'admin_update_delete_student.php?id=$row[id]'>Delete"."</td>
+                    <td>" . $row['id'] . "</td>
+                    <td>" . ucwords($row['fname']) . "</td>
+                    <td>" . ucwords($row['lname']) . "</td>
+                    <td>" . $row['joining_date'] . "</td>
+                    <td>" . $row['dept'] . "</td>
+                    <td>" . $row['teacherphone'] . "</td>
+                    <td>" . $row['teacheremail'] . "</td>
+                    <td>" . $row['added_by'] . "</td>
+                    <td>" . "<a class=\"btn btn-info fw-bold\"href = 'admin_teacher_update_revise_teacher.php?iid=$row[id]&fn=$row[fname]&ln=$row[lname]&date=$row[joining_date]'>Update" . "</td>
+                    <td>"."<a class=\"btn btn-danger fw-bold\"href = 'admin_teacher_update_delete_teacher.php?id=$row[id]'>Delete"."</td>
                     </tr>";
                 } 
-            }
-            
+            } 
         ?>
         <?php
     //session_start();
@@ -135,17 +126,17 @@
             $key = $_POST['name'];
             $rev = strrev($key);
             $select;
-            if(substr($key,0,3)=="301")
+            if(substr($key,0,3)=="201")
             {
-                $select = mysqli_query($con, "SELECT * FROM student_user WHERE id LIKE '%$key%'");
+                $select = mysqli_query($con, "SELECT * FROM teacher_user WHERE id LIKE '%$key%'");
             }
-            else if(substr($rev,0,4)=="ude.htuoshtron@")
+            else if(substr($rev,0,3)=="ude")
             {
-                $select = mysqli_query($con, "SELECT * FROM student_user WHERE studentemail LIKE '%$key%'");
+                $select = mysqli_query($con, "SELECT * FROM teacher_user WHERE teacheremail LIKE '%$key%'");
             }
             else
             {
-                $select = mysqli_query($con, "SELECT * FROM student_user WHERE CONCAT(fname,\" \",lname) LIKE '%$key%'");
+                $select = mysqli_query($con, "SELECT * FROM teacher_user WHERE CONCAT(fname,\" \",lname) LIKE '%$key%'");
             }
             
             if($key!='')
@@ -155,14 +146,10 @@
                         <td>" . $row['id'] . "</td>
                         <td>" . ucwords($row['fname']) . "</td>
                         <td>" . ucwords($row['lname']) . "</td>
-                        <td>" . $row['birth_date'] . "</td>
-                        <td>" . $row['blood_group'] . "</td>
+                        <td>" . $row['joining_date'] . "</td>
                         <td>" . $row['dept'] . "</td>
-                        <td>" . $row['semester'] . "</td>
-                        <td>" . $row['cgpa'] . "</td>
-                        <td>" . $row['studentphone'] . "</td>
-                        <td>" . $row['studentemail'] . "</td>
-                        <td>" . $row['addr'] . "</td>
+                        <td>" . $row['teacherphone'] . "</td>
+                        <td>" . $row['teacheremail'] . "</td>
                         <td>" . $row['added_by'] . "</td>
                         <td>" . "<a class=\"btn btn-info fw-bold\"href = '#'>Update" . "</td>
                         <td>"."<a class=\"btn btn-danger fw-bold\"href = 'admin_delete_student.php?id=$row[id]'>Delete"."</td>
