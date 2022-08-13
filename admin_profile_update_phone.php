@@ -17,45 +17,47 @@
     <!-- CSS -->
     <link rel="stylesheet" href="update.css">
     <link rel="stylesheet" href="navfont.css">
-    <link rel="stylesheet" href="teacher.css">
+    <link rel="stylesheet" href="admin.css">
     <link rel="icon" type="image/x-icon" href="photo/unilogo1.png">
     <title>Update Phone</title>
-    
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-light">
+        <!-- navbar -->
+    <nav class="navbar navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="teacher_profile.php">
+                <a class="navbar-brand" href="admin_profile.php">
                     <p>&nbsp; Profile</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="teacher_profile_update.php">
+                <a class="navbar-brand fw-bolder" href="admin_profile_update.php">
                     <p>&nbsp; Profile Update</p>
                 </a>
-                <a class="navbar-brand" href="teacher_section.php">
-                    <p>&nbsp; Students</p>
+                <a class="navbar-brand" href="admin_student.php">
+                    <p>&nbsp; Student Panel</p>
                 </a>
-                <a class="navbar-brand" href="teacher_grading.php">
-                    <p>&nbsp; Grading</p>
+                <a class="navbar-brand" href="admin_teacher.php">
+                    <p>&nbsp; Faculty Panel</p>
                 </a>
-                <a class="navbar-brand" href="teacher_notice.php">
+                <a class="navbar-brand" href="admin_adding_notice.php">
                     <p>&nbsp; Notice Board</p>
                 </a>
-                <a class="navbar-brand" href="teacher_logout.php">
+                <a class="navbar-brand" href="admin_logout.php">
                     <p>&nbsp; Logout</p>
                 </a>
             </div>
         </nav>
+
+        <!-- sub navbar -->
         <nav class="navbar navbar-light">
             <div class="container justify-content-around">
-                <a class="navbar-brand fw-bolder" href="teacher_profile_update_phone.php">
+                <a class="navbar-brand fw-bolder" href="admin_profile_update_phone.php">
                     <p>&nbsp; Phone Number Update</p>
                 </a>
-                <a class="navbar-brand" href="teacher_profile_update_email.php">
+                <a class="navbar-brand" href="admin_profile_update_email.php">
                     <p>&nbsp; Email Update</p>
                 </a>
-                <a class="navbar-brand" href="teacher_profile_update_password.php">
+                <a class="navbar-brand" href="admin_profile_update_password.php">
                     <p>&nbsp; Password Update</p>
                 </a>
             </div>
@@ -67,48 +69,49 @@
         <!-- PHP -->
         <?php
             $user = $_SESSION['username'];
-            $select = mysqli_query($con, "SELECT * FROM teacher_user WHERE id = $user");
+            //mysql query
+            $select = mysqli_query($con, "SELECT * FROM admin_user WHERE adminuser = '$user'");
             $row = mysqli_fetch_array($select);
             if(is_array($row))
             {
-                echo "&nbsp; <strong>Current Phone number: </strong><span>",$row['teacherphone'],"</span><br>";
+                echo "&nbsp; <strong>Current Phone number: </strong><span>",$row['adminphone'],"</span><br>";
             }
         ?>
         <br><br>
         <div class="container">
-                <div class="add">
-                    <h3>Enter new phone number to update</h3>
-                        <form action="teacher_profile_update_phone.php" method="post">
-                        <input type="text" name="phone" id="phone"
-                            class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light"
-                            style="height: 38px; width:48%;" placeholder="New Phone number"><br><br>
-                        <input type="password" name="password" id="password"
+            <div class="add">
+                <!-- form to take new phone number -->
+                <h3>Enter new phone number to update</h3>
+                <form action="admin_profile_update_phone.php" method="post">
+                    <input type="text" name="phone" id="phone"
+                        class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light"
+                        style="height: 38px; width:48%;" placeholder="New Phone number"><br><br>
+                    <input type="password" name="password" id="password"
                         class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light "
                         style="height: 38px; width:48%;" placeholder="Insert password to confirm"><br><br>
-                        <input type="submit" value="Update" name="add" class="fs-6 fw-bold border-1 rounded-2 px-1 button">
+                    <input type="submit" value="Update" name="add" class="fs-6 fw-bold border-1 rounded-2 px-1 button">
                 </form>
-                </div>
+            </div>
         </div>
         <!-- updating email php code -->
         <?php
             if(isset($_POST['add']))
             {
-            // $user = $_SESSION['username'];
-            // $select = mysqli_query($con, "SELECT * FROM teacher_user WHERE id = $user");
-            // $row = mysqli_fetch_array($select);
+            //taking info from form
             $phone = $_POST['phone'];
             $password = $_POST['password'];
-            //echo $email;
-            if($phone!='' && $password!='' && $password==$row['teacherpass'])
+            
+            if($phone!='' && $password!='' && $password==$row['adminpass'])
             {
-                $sql = "UPDATE teacher_user SET teacherphone = '$phone' WHERE id = '$user';";
+                //mysql query
+                $sql = "UPDATE admin_user SET adminphone = '$phone' WHERE adminuser = '$user';";
                 if($con->query($sql)==true)
                 {
                     echo '<script>alert("Successfully updated Phone number!!")</script>';
                     header("Refresh:0");
                 }
             }
-            else if($password!=$row['teacherpass'])
+            else if($password!=$row['adminpass'])
             {
                 echo '<script>alert("Please insert correct password!!")</script>';
                 header("Refresh:0");

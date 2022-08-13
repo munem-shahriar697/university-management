@@ -35,6 +35,9 @@
                 <a class="navbar-brand" href="student_cgpa.php">
                     <p>&nbsp; CGPA</p>
                 </a>
+                <a class="navbar-brand" href="student_notice.php">
+                    <p>&nbsp; Notice Board</p>
+                </a>
                 <a class="navbar-brand" href="student_logout.php">
                     <p>&nbsp; Logout</p>
                 </a>

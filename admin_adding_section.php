@@ -22,10 +22,14 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-light">
+        <!-- navbar -->
+    <nav class="navbar navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="admin_profile.php">
                     <p>&nbsp; Profile</p>
+                </a>
+                <a class="navbar-brand" href="admin_profile_update.php">
+                    <p>&nbsp; Profile Update</p>
                 </a>
                 <a class="navbar-brand" href="admin_student.php">
                     <p>&nbsp; Student Panel</p>
@@ -33,11 +37,8 @@
                 <a class="navbar-brand" href="admin_teacher.php">
                     <p>&nbsp; Faculty Panel</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="admin_adding_section.php">
-                    <p>&nbsp; Assigning section</p>
-                </a>
-                <a class="navbar-brand" href="admin_adding_course.php">
-                    <p>&nbsp; Adding Course</p>
+                <a class="navbar-brand" href="admin_adding_notice.php">
+                    <p>&nbsp; Notice Board</p>
                 </a>
                 <a class="navbar-brand" href="admin_logout.php">
                     <p>&nbsp; Logout</p>

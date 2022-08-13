@@ -36,6 +36,9 @@
                 <a class="navbar-brand" href="student_cgpa.php">
                     <p>&nbsp; CGPA</p>
                 </a>
+                <a class="navbar-brand" href="student_notice.php">
+                    <p>&nbsp; Notice Board</p>
+                </a>
                 <a class="navbar-brand" href="student_logout.php">
                     <p>&nbsp; Logout</p>
                 </a>
@@ -50,9 +53,7 @@
             $select = mysqli_query($con, "SELECT * FROM student_user WHERE id = $user");
             $row = mysqli_fetch_array($select);
             echo "<strong>Welcome </strong><h2>",ucwords($row['fname'])," ",ucwords($row['lname']),"</h2>";
-        ?>
-        <div class="align">
-            <?php
+       
             if(is_array($row))
             {
                 echo 
@@ -65,7 +66,6 @@
             }
             $con->close();
             ?>
-        </div>
     </main>
 
 

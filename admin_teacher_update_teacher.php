@@ -17,37 +17,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Document</title>
+    <!-- css files -->
     <link rel="stylesheet" href="update.css">
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="navfont.css">
+    <!-- custom css -->
+    <style>
+        .customtable {
+            table-layout: fixed;
+        }
 
+        td {
+            word-wrap: break-word;
+        }
+    </style>
 
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-light">
+        <!-- navbar -->
+    <nav class="navbar navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="admin_profile.php">
                     <p>&nbsp; Profile</p>
                 </a>
+                <a class="navbar-brand" href="admin_profile_update.php">
+                    <p>&nbsp; Profile Update</p>
+                </a>
                 <a class="navbar-brand" href="admin_student.php">
                     <p>&nbsp; Student Panel</p>
                 </a>
-                <a class="navbar-brand  fw-bolder" href="admin_teacher.php">
+                <a class="navbar-brand fw-bolder" href="admin_teacher.php">
                     <p>&nbsp; Faculty Panel</p>
                 </a>
-                <a class="navbar-brand" href="admin_adding_section.php">
-                    <p>&nbsp; Assigning section</p>
-                </a>
-                <a class="navbar-brand" href="admin_adding_course.php">
-                    <p>&nbsp; Adding Course</p>
+                <a class="navbar-brand" href="admin_adding_notice.php">
+                    <p>&nbsp; Notice Board</p>
                 </a>
                 <a class="navbar-brand" href="admin_logout.php">
                     <p>&nbsp; Logout</p>
                 </a>
             </div>
         </nav>
+        <!-- sub navbar -->
         <nav class="navbar navbar-light">
             <div class="container justify-content-around">
                 <a class="navbar-brand" href="admin_teacher_adding_teacher.php">
@@ -69,6 +81,7 @@
     <main class="mx-auto border border-0 rounded rounded-2 text-white px-5 pb-3 pt-3" style="width: 90%;">
         <!-- <h2 class="container bg-light">Admin: <?php  echo $_SESSION['username']; ?></h2><br> -->
 
+        <!-- form to search student -->
         <div class="container" style="width: 1000px;">
             <div class="add py-5 ps-5 mx-auto">
                 <h3 class="text-white">Search Student to Update or Delete</h3>
@@ -83,7 +96,8 @@
                 </form>
             </div>
         </div>
-        <table class="table text-white table-bordered mt-3 p-2">
+        <!-- table to show info -->
+        <table class="table text-white table-bordered mt-3 p-2 customtable">
             <thead>
             <th>ID </th>
                 <th>First name </th>

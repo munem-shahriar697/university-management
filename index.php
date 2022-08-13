@@ -1,3 +1,4 @@
+<!-- connecting to db and starting of a session -->
 <?php
     session_start();
     require_once('configure.php');
@@ -26,6 +27,7 @@
 
 <body>
     <header>
+        <!-- Navbar -->
         <nav class="navbar navbar-light" style="background-color: #E5E3C9;">
             <div class="container">
                 <a class="navbar-brand" href="admin_login.php">

@@ -91,16 +91,21 @@
     <!-- PHP code -->
     <?php
     session_start();
+        // cheking if button is clicked if clicked then these id and pass checks will happen
         if(isset($_POST['login']))
         {
+            //taking username and password from the input boxes
             $Username = $_POST['username'];
             $password = $_POST['password'];
-
+        
+        //loading data from the db table "admin_user"
         $select = mysqli_query($con, "SELECT * FROM admin_user WHERE adminuser = '$Username'  AND adminpass = '$password'");
         $row = mysqli_fetch_array($select);
 
+        //checking if the array has any data in it
         if(is_array($row))
         {
+            //matching the data taken from table and inputbox
             $_SESSION['username'] = $row['adminuser'];
             $_SESSION['password'] = $row['adminpass'];
         }
@@ -108,6 +113,7 @@
             echo '<script>alert("Invalid Username or Password")</script>';
         }
         }
+        //will redirect user to the admin profile page if the data is matched
         if(isset($_SESSION['username'])){
             header("Location:admin_profile.php");
         }
@@ -123,5 +129,3 @@
 </body>
 
 </html>
-
-<!-- INSERT INTO `admin_user` (`sl`, `username`, `passwordword`) VALUES (NULL, 'munem', 'munem'); -->

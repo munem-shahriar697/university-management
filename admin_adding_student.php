@@ -17,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Document</title>
+    <!-- css files -->
     <link rel="stylesheet" href="update.css">
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="navfont.css">
@@ -24,10 +25,14 @@
 
 <body>
     <header>
+        <!-- navbar -->
     <nav class="navbar navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="admin_profile.php">
                     <p>&nbsp; Profile</p>
+                </a>
+                <a class="navbar-brand" href="admin_profile_update.php">
+                    <p>&nbsp; Profile Update</p>
                 </a>
                 <a class="navbar-brand fw-bolder" href="admin_student.php">
                     <p>&nbsp; Student Panel</p>
@@ -35,17 +40,15 @@
                 <a class="navbar-brand" href="admin_teacher.php">
                     <p>&nbsp; Faculty Panel</p>
                 </a>
-                <a class="navbar-brand" href="admin_adding_section.php">
-                    <p>&nbsp; Assigning section</p>
-                </a>
-                <a class="navbar-brand" href="admin_adding_course.php">
-                    <p>&nbsp; Adding Course</p>
+                <a class="navbar-brand" href="admin_adding_notice.php">
+                    <p>&nbsp; Notice Board</p>
                 </a>
                 <a class="navbar-brand" href="admin_logout.php">
                     <p>&nbsp; Logout</p>
                 </a>
             </div>
         </nav>
+        <!-- sub navbar -->
         <nav class="navbar navbar-light">
             <div class="container justify-content-around">
                 <a class="navbar-brand fw-bolder" href="admin_adding_student.php">
@@ -68,6 +71,8 @@
     <!-- <h2 class="container bg-light">Admin: <?php  echo $_SESSION['username']; ?></h2><br> -->
 
     <div class="container" style="width: 1000px;">
+
+            <!-- form to take information of student -->
             <div class="add py-5 ps-5 mx-auto">
                 <h3 class="text-white">Insert information of a Student to add</h3>
                     <form action="admin_adding_student.php" method="post">
@@ -80,6 +85,19 @@
                     <input type="text" name="dob" id="dob"
                         class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light"
                         style="height: 38px; width:90%;" placeholder="Date of Birth" onfocus="(this.type='date')"><br><br>
+                    <input list="genders" name="gender" placeholder="Gender" class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light" style="height: 38px; width:90%;">
+                        <datalist id="genders">
+                            <option value="Male">
+                            <option value="Female">   
+                        </datalist>
+                    <br><br>
+                    <input type="text" name="nid" id="nid"
+                        class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light"
+                        style="height: 38px; width:90%;" placeholder="National Id"><br><br>
+
+                    <input type="text" name="birth_cert" id="birth_cert"
+                        class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light"
+                        style="height: 38px; width:90%;" placeholder="Birth Certificate Number"><br><br>
                     <input type="text" name="phone" id="phone"
                         class="border border-2 border-dark rounded rounded-2 fs-5 fw-light bg-light"
                         style="height: 38px; width:90%;" placeholder="Phone number"><br><br>
@@ -133,9 +151,11 @@
     </main>
 
     <?php
-    //session_start();
+
+        // checking button click
         if(isset($_POST['add']))
         {
+            // taking infos from input boxes
             $admin = $_SESSION['username'];
             $first = $_POST['fname'];
             $last = $_POST['lname'];
@@ -147,12 +167,17 @@
             $bg = $_POST['bg'];
             $cgpa = $_POST['cgpa'];
             $address = $_POST['address'];
+            $gender = $_POST['gender'];
+            $nid = $_POST['nid'];
+            $birth_cert = $_POST['birth_cert'];
 
+            //mysql query to load existing data from db table
             $select = mysqli_query($con, "SELECT * FROM student_user WHERE studentphone = '$phone'");
             $row = mysqli_fetch_array($select);
 
             if(is_array($row))
             {
+                //cheking for duplicate data
                 $_SESSION['phone'] = $row['studentphone'];
                 echo '<script>alert("Do not add same student multiple times!!")</script>';
             }
@@ -160,9 +185,10 @@
             {
                 header("Location:admin_login.php");
             }
-            else if($first!='' || $last!='' || $email!='' || $phone!='' || $dept!='' || $date!='')
+            else if($first!='' || $last!='' || $email!='' || $phone!='' || $dept!='' || $date!=''|| $gender!='' || $nid!='' || $birth_cert!='')
             {
-                $sql = "INSERT INTO student_user (fname, lname, birth_date, studentphone, studentemail, dept, semester, cgpa, blood_group, addr, studentuser, studentpass, added_by) VALUES ('$first', '$last', '$date', '$phone', '$email', '$dept', '$semester', '$cgpa', '$bg', '$address','$first', '$phone','$admin');";
+                //mysql query to insert new student's data into table
+                $sql = "INSERT INTO student_user (fname, lname, birth_date, studentphone, studentemail, dept, semester, cgpa, blood_group, addr,studentgender, studentnid, studentbirth_cert, studentuser, studentpass, added_by) VALUES ('$first', '$last', '$date', '$phone', '$email', '$dept', '$semester', '$cgpa', '$bg', '$address','$gender','$nid','$birth_cert','$first', '$phone','$admin');";
                 if($con->query($sql)==true )
                 {
                     echo '<script>alert("Successfully added Student")</script>';

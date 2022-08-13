@@ -34,10 +34,13 @@
                     <p>&nbsp; Profile Update</p>
                 </a>
                 <a class="navbar-brand" href="teacher_section.php">
-                    <p>&nbsp; Sections</p>
+                    <p>&nbsp; Students</p>
                 </a>
                 <a class="navbar-brand" href="teacher_grading.php">
                     <p>&nbsp; Grading</p>
+                </a>
+                <a class="navbar-brand" href="teacher_notice.php">
+                    <p>&nbsp; Notice Board</p>
                 </a>
                 <a class="navbar-brand" href="teacher_logout.php">
                     <p>&nbsp; Logout</p>

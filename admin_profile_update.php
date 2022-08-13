@@ -18,41 +18,46 @@
     <!-- CSS -->
     <link rel="stylesheet" href="update.css">
     <link rel="stylesheet" href="navfont.css">
-    <link rel="stylesheet" href="student.css">
+    <link rel="stylesheet" href="admin.css">
     <link rel="icon" type="image/x-icon" href="photo/unilogo1.png">
     <title>Profile Update</title>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-light">
+        <!-- navbar -->
+    <nav class="navbar navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="student_profile.php">
+                <a class="navbar-brand" href="admin_profile.php">
                     <p>&nbsp; Profile</p>
                 </a>
-                <a class="navbar-brand fw-bolder" href="student_profile_update.php">
+                <a class="navbar-brand fw-bolder" href="admin_profile_update.php">
                     <p>&nbsp; Profile Update</p>
                 </a>
-                <a class="navbar-brand" href="student_cgpa.php">
-                    <p>&nbsp; CGPA</p>
+                <a class="navbar-brand" href="admin_student.php">
+                    <p>&nbsp; Student Panel</p>
                 </a>
-                <a class="navbar-brand" href="student_notice.php">
+                <a class="navbar-brand" href="admin_teacher.php">
+                    <p>&nbsp; Faculty Panel</p>
+                </a>
+                <a class="navbar-brand" href="admin_adding_notice.php">
                     <p>&nbsp; Notice Board</p>
                 </a>
-                <a class="navbar-brand" href="student_logout.php">
+                <a class="navbar-brand" href="admin_logout.php">
                     <p>&nbsp; Logout</p>
                 </a>
             </div>
         </nav>
+        <!-- sub navbar -->
         <nav class="navbar navbar-light">
             <div class="container justify-content-around">
-                <a class="navbar-brand" href="student_profile_update_phone.php">
+                <a class="navbar-brand" href="admin_profile_update_phone.php">
                     <p>&nbsp; Phone Number Update</p>
                 </a>
-                <a class="navbar-brand" href="student_profile_update_email.php">
+                <a class="navbar-brand" href="admin_profile_update_email.php">
                     <p>&nbsp; Email Update</p>
                 </a>
-                <a class="navbar-brand" href="student_profile_update_password.php">
+                <a class="navbar-brand" href="admin_profile_update_password.php">
                     <p>&nbsp; Password Update</p>
                 </a>
             </div>
@@ -64,9 +69,10 @@
         <!-- PHP -->
         <?php
         $user = $_SESSION['username'];
-        $select = mysqli_query($con, "SELECT * FROM student_user WHERE id = $user");
+        //mysql query
+        $select = mysqli_query($con, "SELECT * FROM admin_user WHERE adminuser = '$user'");
         $row = mysqli_fetch_array($select);
-        $fname = ucwords($row['fname']);
+        $fname = ucwords($row['adminuser']);
         $last = ucwords($row['lname']);
         if(is_array($row))
         {
